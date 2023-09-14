@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34003.232
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OSKITestAPI", "OSKITestAPI.csproj", "{AEAB83B1-8B5F-46C0-BC74-02758B501E0E}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "reactproject1", "reactproject1\reactproject1.esproj", "{D2275BFF-590B-4E00-B09F-88D71BC90239}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEAB83B1-8B5F-46C0-BC74-02758B501E0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEAB83B1-8B5F-46C0-BC74-02758B501E0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEAB83B1-8B5F-46C0-BC74-02758B501E0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEAB83B1-8B5F-46C0-BC74-02758B501E0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2275BFF-590B-4E00-B09F-88D71BC90239}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2275BFF-590B-4E00-B09F-88D71BC90239}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2275BFF-590B-4E00-B09F-88D71BC90239}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D2275BFF-590B-4E00-B09F-88D71BC90239}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2275BFF-590B-4E00-B09F-88D71BC90239}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2275BFF-590B-4E00-B09F-88D71BC90239}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EF80489A-E6F9-44A7-8F69-09ADEE2880B8}
+	EndGlobalSection
+EndGlobal
