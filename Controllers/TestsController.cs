@@ -50,6 +50,8 @@ namespace OSKITestAPI.Controllers
         /// <response code="401">If unautorized user or not admin user</response> 
         [HttpGet("/GetAllTests")]
         [Authorize(Roles = "admin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> GetAllTests()
         {
             var tests = _context.Tests.ToList();
@@ -63,6 +65,8 @@ namespace OSKITestAPI.Controllers
         /// <response code="200">Return list with tests</response> 
         /// <response code="401">If unautorized user</response> 
         [HttpGet("/GetAllTestsForCurrentUser")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> GetAllTestsForCurrentUser()
         {
             var tests = _context.Results
@@ -87,6 +91,8 @@ namespace OSKITestAPI.Controllers
         /// <response code="200">Return test name and all quesions</response> 
         /// <response code="401">If unautorized user</response> 
         [HttpGet("/GetTest/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> GetTest(string id)
         {
             var test = _context.Results.Include(r=>r.Test).FirstOrDefault(r =>(r.TestId.ToString() == id) && (r.UserId.ToString() == User.FindFirst("userId").Value));//find better way in programing
@@ -135,6 +141,9 @@ namespace OSKITestAPI.Controllers
         /// <response code="400">If test is unavailable or unassigned or user passed it before</response>
         /// <response code="401">If unautorized user</response> 
         [HttpPost("/AnswerTest/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> AnswerTest(string id, [FromBody] List<AnswerItem> answers)
         {
             var result = _context.Results.Include(r=>r.Test).FirstOrDefault(r => ((r.TestId.ToString() == id) && (r.UserId.ToString() == User.FindFirst("userId").Value)));
@@ -189,6 +198,9 @@ namespace OSKITestAPI.Controllers
         /// <response code="401">If unautorized user or user is not admin</response> 
         [HttpPost("/CreateTest")]
         [Authorize(Roles = "admin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Create([FromBody] NewTestData getTest)
         {
             if ((_context.Tests?.Any(e => e.Name == getTest.Name)).GetValueOrDefault())
@@ -199,7 +211,7 @@ namespace OSKITestAPI.Controllers
             _context.Add(test);
             await _context.SaveChangesAsync();
             foreach (var question in getTest.Questions)
-            {//add by array
+            {
                 Question newQuestion = new Question()
                 {
                     Id = Guid.NewGuid(),
@@ -224,6 +236,9 @@ namespace OSKITestAPI.Controllers
         /// <response code="401">If unautorized user or user is not admin</response> 
         [HttpPost("/AssignTest/{testId}&{userId}")]
         [Authorize(Roles = "admin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Assign(string testId, string userId)
         {
             if (!(_context.Tests?.Any(e => e.Id.ToString() == testId)).GetValueOrDefault())

@@ -1,0 +1,17 @@
+.hidden{
+    display:none;
+}
+
+.login-register{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-register__successful{
+    color: green;
+}
+
+.login-register__fail{
+    color: red;
+}

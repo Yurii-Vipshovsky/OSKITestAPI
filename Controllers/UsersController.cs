@@ -4,11 +4,13 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using Microsoft.IdentityModel.Tokens;
 using OSKITestAPI.Data;
 using OSKITestAPI.Models;
@@ -51,7 +53,7 @@ namespace OSKITestAPI.Controllers
                 {
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
                     new Claim("userId", user.Id.ToString()),
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, user.UserName),
+                    new Claim("userRole", user.UserRole),
                     new Claim(ClaimsIdentity.DefaultRoleClaimType, user.UserRole)
                 };
                 ClaimsIdentity claimsIdentity =
@@ -80,16 +82,6 @@ namespace OSKITestAPI.Controllers
         /// User login using Email and Password
         /// Creates JWT Token for 15 minutes with user info
         /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     POST /Login
-        ///     {
-        ///        "email": "user@email.com",
-        ///        "password": "userPassword"
-        ///     }
-        ///
-        /// </remarks>
         /// <param name="loginUser"></param>
         /// <returns>Access token</returns>
         /// <response code="200">If login successful</response> 
@@ -128,19 +120,8 @@ namespace OSKITestAPI.Controllers
         /// Create user with admin Role impossible only change in data base
         /// </summary>
         /// <param name="getUser"></param>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     POST /Register
-        ///     {
-        ///        "name": "UserName",
-        ///        "email": "user@email.com",
-        ///        "password": "userPassword"
-        ///     }
-        ///
-        /// </remarks>
         /// <response code="200">If User registered successful</response> 
-        /// <response code="400">If User with same email is already registered</response> 
+        /// <response code="400">If User with same email is already registered, or invalid email</response> 
         [HttpPost("/Register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -150,6 +131,11 @@ namespace OSKITestAPI.Controllers
             if ((_context.Users?.Any(e => e.Email == getUser.email)).GetValueOrDefault())
             {
                 return BadRequest("User with this email is already registered");
+            }
+            string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
+            if (!Regex.IsMatch(getUser.email, emailPattern))
+            {
+                return BadRequest("Invalid Email");
             }
             user.Id = Guid.NewGuid();
             _context.Add(user);

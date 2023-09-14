@@ -28,10 +28,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="reactproject1\reactproject1.esproj">
-	  <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-	 </ProjectReference>
-  </ItemGroup>
-
 </Project>
