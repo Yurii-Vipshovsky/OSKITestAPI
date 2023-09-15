@@ -8,6 +8,12 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
+#WORKDIR /app
+#COPY /app/client/oskifront/build ./client
+#
+## Додайте конфігурацію для сервера React
+#ENV REACT_APP_SERVER_DOCKER_URL=http://localhost:32768/
+
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["OSKITestAPI.csproj", "."]

@@ -69,7 +69,7 @@ namespace OSKITestAPI.Controllers
         /// <returns>List with all users</returns>
         /// <response code="200">Return list with all users</response> 
         /// <response code="401">If unautorized user or not admin user</response> 
-        [HttpGet("/GetAllUsers")]
+        [HttpGet("/api/GetAllUsers")]
         [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -86,7 +86,7 @@ namespace OSKITestAPI.Controllers
         /// <returns>Access token</returns>
         /// <response code="200">If login successful</response> 
         /// <response code="400">If invalid username or password</response>
-        [HttpPost("/Login")]
+        [HttpPost("/api/Login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Login([FromForm] LoginUser loginUser)
@@ -122,7 +122,7 @@ namespace OSKITestAPI.Controllers
         /// <param name="getUser"></param>
         /// <response code="200">If User registered successful</response> 
         /// <response code="400">If User with same email is already registered, or invalid email</response> 
-        [HttpPost("/Register")]
+        [HttpPost("/api/Register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromForm] RegisterUser getUser)

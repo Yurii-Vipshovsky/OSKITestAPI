@@ -48,7 +48,7 @@ namespace OSKITestAPI.Controllers
         /// <returns>List with all tests</returns>
         /// <response code="200">Return list with all tests</response> 
         /// <response code="401">If unautorized user or not admin user</response> 
-        [HttpGet("/GetAllTests")]
+        [HttpGet("/api/GetAllTests")]
         [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -64,7 +64,7 @@ namespace OSKITestAPI.Controllers
         /// <returns>All tests assigned to curent user</returns>
         /// <response code="200">Return list with tests</response> 
         /// <response code="401">If unautorized user</response> 
-        [HttpGet("/GetAllTestsForCurrentUser")]
+        [HttpGet("/api/GetAllTestsForCurrentUser")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> GetAllTestsForCurrentUser()
@@ -90,7 +90,7 @@ namespace OSKITestAPI.Controllers
         /// <returns>Return test name and all quesions</returns>
         /// <response code="200">Return test name and all quesions</response> 
         /// <response code="401">If unautorized user</response> 
-        [HttpGet("/GetTest/{id}")]
+        [HttpGet("/api/GetTest/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> GetTest(string id)
@@ -140,7 +140,7 @@ namespace OSKITestAPI.Controllers
         /// <response code="200">User score for this test</response> 
         /// <response code="400">If test is unavailable or unassigned or user passed it before</response>
         /// <response code="401">If unautorized user</response> 
-        [HttpPost("/AnswerTest/{id}")]
+        [HttpPost("/api/AnswerTest/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -196,7 +196,7 @@ namespace OSKITestAPI.Controllers
         /// <response code="200">If test created</response> 
         /// <response code="400">If test with same name is exists</response>
         /// <response code="401">If unautorized user or user is not admin</response> 
-        [HttpPost("/CreateTest")]
+        [HttpPost("/api/CreateTest")]
         [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -234,7 +234,7 @@ namespace OSKITestAPI.Controllers
         /// <response code="200">If test created</response> 
         /// <response code="400">If test with id doesn't exist, if user with id doesn't exists, if user already assigned to this test</response>
         /// <response code="401">If unautorized user or user is not admin</response> 
-        [HttpPost("/AssignTest/{testId}&{userId}")]
+        [HttpPost("/api/AssignTest/{testId}&{userId}")]
         [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

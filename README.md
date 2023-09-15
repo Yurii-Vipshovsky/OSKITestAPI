@@ -1,7 +1,6 @@
 # OSKITestAPI
 
-!!!Docker not tested!!!
-!!!Start by IIS Express of https!!!
+!!!Start by https launch profile!!!
 
 Apply-migration to database
 Start backend server on https://localhost:7235
